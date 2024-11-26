@@ -1,9 +1,14 @@
- <!DOCTYPE html>
+const express = require('express');
+const app = express();
+const port = 3000; // You can use any available port
+
+// Route to serve the personalized HTML content
+app.get('/', (req, res) => {
+    res.send(`
+        <!DOCTYPE html>
         <html>
         <head>
             <title>D'Marqco Rodgers</title>
-		<!-- link to main stylesheet -->
-		<link rel="stylesheet" type="text/css" href="/css/main.css">
         </head>
         <body>
             <ul>
@@ -15,9 +20,7 @@
             <h1>Hi there, I'm D'Marqco Rodgers!</h1>
             <p>I am a Computer Science major. Please check out my projects here:</p>
             <ul>
-                <li><a href="https://github.com/" target="_blank">My GitHub Profile</a></li>
+                <li><a href="https://xaer2002.github.io/" target="_blank">My GitHub Projects</a></li>
             </ul>
         </body>
         </html>
-    
-
