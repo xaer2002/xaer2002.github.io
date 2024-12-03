@@ -1,2 +1,3 @@
 name: D'Marqco Rodgers, student of computer science
 markdown: kramdown
+permalink: /blog/:year/:month/:day/:title
