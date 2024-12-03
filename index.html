@@ -56,25 +56,25 @@
 <body>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">CV</a></li>
-            <li><a href="#">Blog</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cv.html">CV</a></li>
+            <li><a href="blog.html">Blog</a></li>
         </ul>
     </nav>
 
     <h1>Hi there, I'm D'Marqco Rodgers!</h1>
     <p>I am a Computer Science major. Please check out my projects below:</p>
     <ul style="text-align: center; list-style-type: none; padding: 0;">
-        <li><a href="https://xaer2002.github.io/" target="_blank">My GitHub Projects</a></li>
+        <li><a href="https://github.com/xaer2002/" target="_blank">My GitHub Projects</a></li>
     </ul>
 
     <h1>CSV Data from GitHub</h1>
     <div id="csv-table"></div>
 
     <script>
-        // URL of the raw CSV file on GitHub (replace with your raw URL)
-        const csvUrl = 'https://github.com/xaer2002/xaer2002.github.io/blob/main/index.html';  // Replace this with your raw CSV URL
+        // Replace this with the raw GitHub URL for your CSV file
+        const csvUrl = 'https://raw.githubusercontent.com/xaer2002/xaer2002.github.io/main/data.csv';
 
         // Fetch the CSV file from GitHub and parse it
         fetch(csvUrl)
@@ -91,7 +91,7 @@
                
                 // Create table header
                 const headers = parsedData.meta.fields;
-                tableHTML += '<tr>';
+                               tableHTML += '<tr>';
                 headers.forEach(header => {
                     tableHTML += `<th>${header}</th>`;
                 });
