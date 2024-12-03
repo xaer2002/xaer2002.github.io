@@ -1,19 +1,121 @@
-  <!DOCTYPE html>
-        <html>
-        <head>
-            <title>D'Marqco Rodgers</title>
-        </head>
-        <body>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">CV</a></li>
-                <li><a href="#">Blog</a></li>
-            </ul>
-            <h1>Hi there, I'm D'Marqco Rodgers!</h1>
-            <p>I am a Computer Science major. Please check out my projects here:</p>
-            <ul>
-                <li><a href="https://xaer2002.github.io/" target="_blank">My GitHub Projects</a></li>
-            </ul>
-        </body>
-        </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D'Marqco Rodgers - Projects</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script> <!-- External library to parse CSV -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-right: 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        p {
+            text-align: center;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">CV</a></li>
+            <li><a href="#">Blog</a></li>
+        </ul>
+    </nav>
+
+    <h1>Hi there, I'm D'Marqco Rodgers!</h1>
+    <p>I am a Computer Science major. Please check out my projects below:</p>
+    <ul style="text-align: center; list-style-type: none; padding: 0;">
+        <li><a href="https://xaer2002.github.io/" target="_blank">My GitHub Projects</a></li>
+    </ul>
+
+    <h1>CSV Data from GitHub</h1>
+    <div id="csv-table"></div>
+
+    <script>
+        // URL of the raw CSV file on GitHub (replace with your raw URL)
+        const csvUrl = 'https://raw.githubusercontent.com/yourusername/yourrepository/main/exported_data.csv';  // Replace this with your raw CSV URL
+
+        // Fetch the CSV file from GitHub and parse it
+        fetch(csvUrl)
+            .then(response => response.text())  // Get the CSV file as text
+            .then(data => {
+                // Use PapaParse to parse the CSV data
+                const parsedData = Papa.parse(data, {
+                    header: true,   // Use the first row as headers
+                    skipEmptyLines: true  // Skip empty lines
+                });
+
+                // Build the table dynamically
+                let tableHTML = '<table>';
+               
+                // Create table header
+                const headers = parsedData.meta.fields;
+                tableHTML += '<tr>';
+                headers.forEach(header => {
+                    tableHTML += `<th>${header}</th>`;
+                });
+                tableHTML += '</tr>';
+
+                // Create table rows
+                parsedData.data.forEach(row => {
+                    tableHTML += '<tr>';
+                    headers.forEach(header => {
+                        tableHTML += `<td>${row[header]}</td>`;
+                    });
+                    tableHTML += '</tr>';
+                });
+
+                tableHTML += '</table>';
+
+                // Display the table on the website
+                document.getElementById('csv-table').innerHTML = tableHTML;
+            })
+            .catch(error => {
+                console.error('Error fetching the CSV file:', error);
+                document.getElementById('csv-table').innerHTML = 'Failed to load CSV data.';
+            });
+    </script>
+</body>
+</html>
+
