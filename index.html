@@ -1,4 +1,23 @@
 <!DOCTYPE html>
+        <html>
+        <head>
+            <title>D'Marqco Rodgers</title>
+        </head>
+        <body>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">CV</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+            <h1>Hi there, I'm D'Marqco Rodgers!</h1>
+            <p>I am a Computer Science major. Please check out my projects here:</p>
+            <ul>
+                <li><a href="https://xaer2002.github.io/" target="_blank">My GitHub Projects</a></li>
+            </ul>
+        </body>
+        </html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -56,26 +75,22 @@
 <body>
     <nav>
         <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="cv.html">CV</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">CV</a></li>
+            <li><a href="#">Blog</a></li>
         </ul>
     </nav>
-
     <h1>Hi there, I'm D'Marqco Rodgers!</h1>
     <p>I am a Computer Science major. Please check out my projects below:</p>
     <ul style="text-align: center; list-style-type: none; padding: 0;">
-        <li><a href="https://github.com/xaer2002/" target="_blank">My GitHub Projects</a></li>
+        <li><a href="https://xaer2002.github.io/" target="_blank">My GitHub Projects</a></li>
     </ul>
-
     <h1>CSV Data from GitHub</h1>
     <div id="csv-table"></div>
-
     <script>
-        // Replace this with the raw GitHub URL for your CSV file
-        const csvUrl = 'https://raw.githubusercontent.com/xaer2002/xaer2002.github.io/main/data.csv';
-
+        // URL of the raw CSV file on GitHub (replace with your raw URL)
+        const csvUrl = 'https://raw.githubusercontent.com/yourusername/yourrepository/main/exported_data.csv';  // Replace this with your raw CSV URL
         // Fetch the CSV file from GitHub and parse it
         fetch(csvUrl)
             .then(response => response.text())  // Get the CSV file as text
@@ -85,18 +100,16 @@
                     header: true,   // Use the first row as headers
                     skipEmptyLines: true  // Skip empty lines
                 });
-
                 // Build the table dynamically
                 let tableHTML = '<table>';
                
                 // Create table header
                 const headers = parsedData.meta.fields;
-                               tableHTML += '<tr>';
+                tableHTML += '<tr>';
                 headers.forEach(header => {
                     tableHTML += `<th>${header}</th>`;
                 });
                 tableHTML += '</tr>';
-
                 // Create table rows
                 parsedData.data.forEach(row => {
                     tableHTML += '<tr>';
@@ -105,9 +118,7 @@
                     });
                     tableHTML += '</tr>';
                 });
-
                 tableHTML += '</table>';
-
                 // Display the table on the website
                 document.getElementById('csv-table').innerHTML = tableHTML;
             })
@@ -118,4 +129,3 @@
     </script>
 </body>
 </html>
-
