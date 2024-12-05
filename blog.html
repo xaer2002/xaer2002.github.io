@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - D'Marqco Rodgers</title>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
 </head>
 <body>
     <nav>
@@ -16,5 +18,69 @@
     </nav>
     <h1>My Blog</h1>
     <p>Welcome to my blog!</p>
+
+    <!-- Form to Add Data -->
+    <form id="blogForm">
+        <label for="blogTitle">Blog Title:</label>
+        <input type="text" id="blogTitle" name="blogTitle" required>
+        <br>
+        <label for="blogContent">Blog Content:</label>
+        <textarea id="blogContent" name="blogContent" required></textarea>
+        <br>
+        <button type="submit">Add Blog Post</button>
+    </form>
+
+    <!-- Display Blog Posts -->
+    <div id="blogPosts">
+        <h2>All Blog Posts</h2>
+        <ul id="postsList"></ul>
+    </div>
+
+    <script>
+        // Firebase configuration (Replace with your Firebase project details)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // Add blog post to Firebase
+        const blogForm = document.getElementById('blogForm');
+        blogForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('blogTitle').value;
+            const content = document.getElementById('blogContent').value;
+
+            db.ref('blogPosts').push({
+                title: title,
+                content: content,
+                timestamp: new Date().toISOString()
+            });
+
+            blogForm.reset();
+        });
+
+        // Fetch and display blog posts
+        const postsList = document.getElementById('postsList');
+        db.ref('blogPosts').on('value', (snapshot) => {
+            postsList.innerHTML = '';
+            const posts = snapshot.val();
+            for (const id in posts) {
+                const post = posts[id];
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${post.title}</strong>: ${post.content}`;
+                postsList.appendChild(li);
+            }
+        });
+    </script>
 </body>
 </html>
