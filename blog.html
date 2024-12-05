@@ -3,84 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - D'Marqco Rodgers</title>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <title>Week #10 Homework</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #444;
+        }
+        h1 {
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="cv.html">CV</a></li>
-            <li><a href="blog.html">Blog</a></li>
-        </ul>
-    </nav>
-    <h1>My Blog</h1>
-    <p>Welcome to my blog!</p>
+    <h1>Week #10 Homework</h1>
+    <h2>Mid Project Reflection: Statistics and Improvement Plan</h2>
+    <p>The mid-term project provided a valuable opportunity to develop a library management system that combines theoretical knowledge with practical coding skills. The project required the creation of a virtual library system capable of managing book records, tracking availability, analyzing ratings, and assigning books to groups of students. While the project achieved its primary objectives, significant challenges and areas for improvement were identified through peer discussion and a deeper review of requirements.</p>
 
-    <!-- Form to Add Data -->
-    <form id="blogForm">
-        <label for="blogTitle">Blog Title:</label>
-        <input type="text" id="blogTitle" name="blogTitle" required>
-        <br>
-        <label for="blogContent">Blog Content:</label>
-        <textarea id="blogContent" name="blogContent" required></textarea>
-        <br>
-        <button type="submit">Add Blog Post</button>
-    </form>
+    <h2>What I've Learned Since Mid-Semester</h2>
+    <p>The mid-term project emphasized the importance of structuring tasks into clear, manageable components. Developing a database of at least 50 books and implementing features such as book availability tracking and rating analysis required a thorough understanding of data structures. The use of lists and dictionaries provided the basis for efficient data organization, while statistical concepts such as calculating the median emphasized the need for precision in coding.</p>
+    <p>One aspect that worked particularly well was dividing students into groups based on the list of classes provided. Using an Excel file to organize the groups simplified the process and allowed clarity when assigning books. Additionally, the feature for identifying books that were borrowed and available was straightforward and worked reliably.</p>
+    <p>However, the project was not without problems. Dynamically and fairly assigning books to groups turned out to be more difficult than expected. Ensuring an accurate calculation of the average rating required careful handling of the data to avoid errors, particularly with odd or even accounting numbers. Another challenge was user input handling, as invalid inputs had to be handled gracefully to ensure a smooth experience. These difficulties highlighted the importance of thorough testing and robust error handling.</p>
 
-    <!-- Display Blog Posts -->
-    <div id="blogPosts">
-        <h2>All Blog Posts</h2>
-        <ul id="postsList"></ul>
-    </div>
+    <h2>Collaboration Statistics</h2>
+    <p>Collaboration with colleagues played a significant role in identifying potential improvements. Discussions revealed alternative approaches to database structuring and group assignments, emphasizing the value of teamwork in problem solving. Peer feedback also pointed out code inefficiencies such as repetitive logic that could have been modularized. These insights provided a clearer path to improving the project.</p>
 
-    <script>
-        // Firebase configuration (Replace with your Firebase project details)
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
+    <h2>Revised Medium-Term Project Plan</h2>
+    <p>To approach a mid-term project again, I would start by refining the overall code structure. The project would be divided into separate modules: library database creation, book availability monitoring, assessment analysis, student group organization and user input management. This modular approach would ensure that each component could be developed and tested independently, minimizing errors during integration.</p>
+    <p>Improving the database design would be a priority. Rather than relying solely on lists, I would consider using dictionaries or even external tools like JSON or a database management system for better scalability and organization. Each book would be assigned a unique identifier, simplifying the process of tracking availability and ratings.</p>
+    <p>For group assignments, I would implement an algorithm to distribute books more fairly between groups. This could include taking book availability and group preferences into account. Rather than hard-coding group names, the system would dynamically generate groups based on a list of classes, making it customizable for future use.</p>
+    <p>The user interface would also benefit from a significant improvement. A menu-driven interface would make the program more intuitive, with clear instructions for user input. Error handling would be built into the system to gracefully handle invalid inputs and provide a smoother user experience.</p>
 
-        // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const db = firebase.database();
+    <h2>How I Would Redo a Mid-Term Project</h2>
+    <p>If I were to repeat the mid-term project, I would start by optimizing the library database design. Using a structured format would allow for easier data manipulation and retrieval. For example, using the "pandas" library in Python would simplify operations such as filtering books by availability or calculating the median rating.</p>
+    <p>Group assignment would be improved by incorporating logic for allocating books based on availability or rating to ensure fairness. This would remove any arbitrary or static allocation of resources. In addition, the program would include a feature that would allow users to dynamically view group details instead of relying on predefined outputs.</p>
+    <p>Finally, the code would be optimized for readability and reusability. Using functions and classes would minimize repetitive code and make the system more modular. This approach would also facilitate testing, as individual components could be tuned independently before integration into the overall system.</p>
 
-        // Add blog post to Firebase
-        const blogForm = document.getElementById('blogForm');
-        blogForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const title = document.getElementById('blogTitle').value;
-            const content = document.getElementById('blogContent').value;
-
-            db.ref('blogPosts').push({
-                title: title,
-                content: content,
-                timestamp: new Date().toISOString()
-            });
-
-            blogForm.reset();
-        });
-
-        // Fetch and display blog posts
-        const postsList = document.getElementById('postsList');
-        db.ref('blogPosts').on('value', (snapshot) => {
-            postsList.innerHTML = '';
-            const posts = snapshot.val();
-            for (const id in posts) {
-                const post = posts[id];
-                const li = document.createElement('li');
-                li.innerHTML = `<strong>${post.title}</strong>: ${post.content}`;
-                postsList.appendChild(li);
-            }
-        });
-    </script>
+    <h2>Conclusion</h2>
+    <p>The mid-term project provided an excellent learning experience and demonstrated the challenges and rewards of designing a functional software system. After considering the initial implementation and incorporating peer feedback, it is clear that the structure, functionality and user experience of the project can be greatly improved. Redesigning the project with these improvements would not only strengthen the system but also strengthen the skills and knowledge gained during the process. This reflective approach ensures continuous growth and creates a solid foundation for future endeavors.</p>
 </body>
 </html>
